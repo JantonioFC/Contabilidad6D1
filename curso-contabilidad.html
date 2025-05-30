@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Contabilidad y Administración</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .module-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .module-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .module-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .module-btn.active {
+            background-color: #2c3e50;
+        }
+        
+        .module {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .module.active {
+            display: block;
+        }
+        
+        .flashcard {
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .flashcard:hover {
+            transform: translateY(-2px);
+        }
+        
+        .flashcard h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .flashcard-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #bdc3c7;
+        }
+        
+        .flashcard.expanded .flashcard-content {
+            display: block;
+        }
+        
+        .quiz {
+            margin-top: 30px;
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .question h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .options label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .options label:hover {
+            background-color: #ecf0f1;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #229954;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .result.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .result.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .progress {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Curso de Contabilidad y Administración</h1>
+        
+        <div class="module-selector">
+            <button class="module-btn active" onclick="showModule('module1')">Módulo 1: Comerciante y Contabilidad</button>
+            <button class="module-btn" onclick="showModule('module2')">Módulo 2: Comprobantes</button>
+            <button class="module-btn" onclick="showModule('module3')">Módulo 3: Partida Doble</button>
+            <button class="module-btn" onclick="showModule('module4')">Módulo 4: Prestaciones BPS</button>
+            <button class="module-btn" onclick="showModule('module5')">Módulo 5: Remuneraciones</button>
+        </div>
+        
+        <!-- Módulo 1: Comerciante y Contabilidad -->
+        <div id="module1" class="module active">
+            <h2>Módulo 1: El Comerciante y la Contabilidad</h2>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📚 Definición de Comerciante</h3>
+                <div class="flashcard-content">
+                    <p><strong>Según el Código de Comercio (Art. 1):</strong></p>
+                    <p>La ley reputa comerciantes a todos los individuos que, teniendo capacidad para contratar, se han inscripto en la matrícula de comerciantes y ejercen de cuenta propia actos de comercio, haciendo de ello su profesión habitual.</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📋 Actos de Comercio</h3>
+                <div class="flashcard-content">
+                    <p>La ley reputa actos de comercio:</p>
+                    <ul>
+                        <li>Toda compra de una cosa para revenderla o alquilar su uso</li>
+                        <li>Operaciones de cambio, banco, corretaje o remate</li>
+                        <li>Negociaciones sobre letras de cambio</li>
+                        <li>Empresas de fábricas, comisiones, depósitos o transporte</li>
+                        <li>Las sociedades anónimas</li>
+                        <li>Operaciones de factores y empleados de comerciantes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📖 Libros de Comercio Obligatorios</h3>
+                <div class="flashcard-content">
+                    <p><strong>Artículo 55 - Son indispensables:</strong></p>
+                    <ol>
+                        <li><strong>El LIBRO DIARIO:</strong> Se asientan día por día todas las operaciones</li>
+                        <li><strong>El de inventarios:</strong> Se abre con la descripción exacta del capital</li>
+                        <li><strong>El copiador de cartas:</strong> Se trasladan todas las cartas comerciales</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>💼 La Cuenta Contable</h3>
+                <div class="flashcard-content">
+                    <p><strong>Definición:</strong> Conjunto de anotaciones relacionadas con un mismo objeto.</p>
+                    <p>Es el instrumento de representación y medida de un elemento patrimonial que capta la situación inicial, las variaciones y la situación final.</p>
+                    <p><strong>Partes:</strong> Se representa en forma de "T" con DEBE (izquierda) y HABER (derecha)</p>
+                </div>
+            </div>
+            
+            <div class="quiz">
+                <h3>Quiz - Módulo 1</h3>
+                <div class="question">
+                    <h4>1. ¿Cuáles son los libros de comercio obligatorios?</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="a"> Libro Mayor, Libro de Caja, Libro de Bancos</label>
+                        <label><input type="radio" name="q1" value="b"> Libro Diario, Libro de Inventarios, Copiador de Cartas</label>
+                        <label><input type="radio" name="q1" value="c"> Libro de Compras, Libro de Ventas, Libro de Caja</label>
+                        <label><input type="radio" name="q1" value="d"> Libro Diario, Libro Mayor, Libro de Balance</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h4>2. Según el Código de Comercio, NO se considera acto de comercio:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="a"> Las compras de bienes raíces</label>
+                        <label><input type="radio" name="q2" value="b"> Las operaciones de cambio</label>
+                        <label><input type="radio" name="q2" value="c"> Las sociedades anónimas</label>
+                        <label><input type="radio" name="q2" value="d"> Las empresas de transporte</label>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkQuiz('module1', ['b', 'a'])">Verificar Respuestas</button>
+                <div id="result-module1" class="result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <!-- Módulo 2: Comprobantes -->
+        <div id="module2" class="module">
+            <h2>Módulo 2: Los Comprobantes</h2>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📄 Definición de Comprobantes</h3>
+                <div class="flashcard-content">
+                    <p>Son la fuente de las registraciones contables. Por cada hecho económico o administrativo se emite un comprobante.</p>
+                    <p>Toda vez que se modifica el patrimonio, se confecciona un documento escrito que deja constancia de la operación comercial.</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>🔧 Funciones de los Comprobantes</h3>
+                <div class="flashcard-content">
+                    <ul>
+                        <li><strong>Función contable:</strong> Fuente de datos para la registración</li>
+                        <li><strong>Función de control:</strong> Permite auditar las registraciones</li>
+                        <li><strong>Función jurídica:</strong> Prueba en juicio si cumplen requisitos</li>
+                        <li><strong>Función impositiva:</strong> Probar declaraciones juradas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📊 Clasificación de Comprobantes</h3>
+                <div class="flashcard-content">
+                    <p><strong>Documentos probatorios:</strong></p>
+                    <ul>
+                        <li>Boleta (venta contado)</li>
+                        <li>Factura (venta crédito)</li>
+                        <li>Nota de Débito (aumenta deudas)</li>
+                        <li>Nota de Crédito (disminuye deudas)</li>
+                        <li>Recibo (constancia de pago)</li>
+                    </ul>
+                    <p><strong>Títulos de crédito:</strong></p>
+                    <ul>
+                        <li>Conformes</li>
+                        <li>Vales</li>
+                        <li>Cheques</li>
+                        <li>Letras de cambio</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>💳 Títulos de Crédito</h3>
+                <div class="flashcard-content">
+                    <p>Documentos autónomos que valen por sí mismos sin depender de la operación que los originó.</p>
+                    <p><strong>Ejemplos:</strong></p>
+                    <ul>
+                        <li><strong>Conforme:</strong> Reconocimiento de deuda con promesa de pago</li>
+                        <li><strong>Vale:</strong> Similar al conforme pero originado en préstamo de dinero</li>
+                        <li><strong>Cheque:</strong> Orden de pago contra un banco</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quiz">
+                <h3>Quiz - Módulo 2</h3>
+                <div class="question">
+                    <h4>1. ¿Qué documento se emite para una venta a crédito?</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="a"> Boleta</label>
+                        <label><input type="radio" name="q3" value="b"> Factura</label>
+                        <label><input type="radio" name="q3" value="c"> Recibo</label>
+                        <label><input type="radio" name="q3" value="d"> Vale</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h4>2. Las Notas de Débito respecto a las Facturas:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="a"> Restan</label>
+                        <label><input type="radio" name="q4" value="b"> Suman</label>
+                        <label><input type="radio" name="q4" value="c"> No afectan</label>
+                        <label><input type="radio" name="q4" value="d"> Las cancelan</label>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkQuiz('module2', ['b', 'b'])">Verificar Respuestas</button>
+                <div id="result-module2" class="result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <!-- Módulo 3: Partida Doble -->
+        <div id="module3" class="module">
+            <h2>Módulo 3: Registración por Partida Doble</h2>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>⚖️ Concepto de Partida Doble</h3>
+                <div class="flashcard-content">
+                    <p>Método de registración contable Balanceante que mantiene constantemente la equivalencia numérica en todas las partidas registradas.</p>
+                    <p>Se realizan anotaciones contrapuestas y por igual valor en no menos de dos cuentas.</p>
+                    <p><strong>Principio fundamental:</strong> "No hay deudor sin acreedor, ni acreedor sin deudor"</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📐 Ecuación Patrimonial</h3>
+                <div class="flashcard-content">
+                    <p><strong>ACTIVO + PÉRDIDAS = PASIVO + CAPITAL + GANANCIAS</strong></p>
+                    <p>Esta ecuación debe mantenerse balanceada en todo momento.</p>
+                    <p>El lado izquierdo corresponde al DEBE y el derecho al HABER.</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📝 Tipos de Cuentas y sus Saldos</h3>
+                <div class="flashcard-content">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Tipo de Cuenta</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Aumenta por</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Saldo Normal</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">ACTIVO</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">DEBE</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">DEUDOR</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">PASIVO</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">HABER</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">ACREEDOR</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">PÉRDIDAS</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">DEBE</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">DEUDOR</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">GANANCIAS</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">HABER</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">ACREEDOR</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📖 Asientos Contables</h3>
+                <div class="flashcard-content">
+                    <p>Anotaciones en el Libro Diario que representan gráficamente la partida doble.</p>
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Fecha cronológica</li>
+                        <li>Cuentas deudoras</li>
+                        <li>Cuentas acreedoras</li>
+                        <li>Valores</li>
+                        <li>Leyenda explicativa</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quiz">
+                <h3>Quiz - Módulo 3</h3>
+                <div class="question">
+                    <h4>1. Las cuentas de ACTIVO aumentan por el:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="a"> DEBE</label>
+                        <label><input type="radio" name="q5" value="b"> HABER</label>
+                        <label><input type="radio" name="q5" value="c"> Ambos</label>
+                        <label><input type="radio" name="q5" value="d"> Ninguno</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h4>2. El saldo normal de una cuenta de PASIVO es:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="a"> DEUDOR</label>
+                        <label><input type="radio" name="q6" value="b"> ACREEDOR</label>
+                        <label><input type="radio" name="q6" value="c"> NULO</label>
+                        <label><input type="radio" name="q6" value="d"> Variable</label>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkQuiz('module3', ['a', 'b'])">Verificar Respuestas</button>
+                <div id="result-module3" class="result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <!-- Módulo 4: Prestaciones BPS -->
+        <div id="module4" class="module">
+            <h2>Módulo 4: Prestaciones Económicas BPS</h2>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>🏛️ Financiamiento de la Seguridad Social</h3>
+                <div class="flashcard-content">
+                    <p>El sistema se financia mediante tres recursos:</p>
+                    <ol>
+                        <li>Aportes de trabajadores y empleadores</li>
+                        <li>Tributos afectados</li>
+                        <li>Contribuciones del Estado a través de rentas generales</li>
+                    </ol>
+                    <p>Desde 1996 rige un régimen mixto: reparto (BPS) y ahorro individual (AFAP)</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>👶 Asignaciones Familiares - Régimen General</h3>
+                <div class="flashcard-content">
+                    <p><strong>Beneficiarios:</strong></p>
+                    <ul>
+                        <li>Niños hasta 14 años en educación primaria</li>
+                        <li>Hasta 18 años cursando secundaria</li>
+                        <li>Personas con discapacidad (asignación especial)</li>
+                    </ul>
+                    <p><strong>Prestación:</strong> Bimestral en dinero, varía según ingresos familiares</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>💰 Subsidio por Desempleo</h3>
+                <div class="flashcard-content">
+                    <p><strong>Beneficiarios:</strong> Trabajadores en desocupación forzosa</p>
+                    <p><strong>Cálculo:</strong></p>
+                    <ul>
+                        <li>Suspendidos: 50% del promedio últimos 6 meses</li>
+                        <li>Despedidos: escala decreciente</li>
+                        <li>Complemento 20% para casados o con hijos</li>
+                    </ul>
+                    <p><strong>Período:</strong> Hasta 4 meses suspendidos, 6 meses despedidos</p>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>👴 Jubilación Común</h3>
+                <div class="flashcard-content">
+                    <p><strong>Requisitos:</strong></p>
+                    <ul>
+                        <li>Hombres: 60 años edad y 30 años servicio</li>
+                        <li>Mujeres: 55 años edad y 30 años servicio</li>
+                    </ul>
+                    <p><strong>Prestación:</strong> 45% del sueldo básico jubilatorio más adicionales por años extras</p>
+                </div>
+            </div>
+            
+            <div class="quiz">
+                <h3>Quiz - Módulo 4</h3>
+                <div class="question">
+                    <h4>1. El período máximo de subsidio por desempleo para trabajadores despedidos es:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="a"> 4 meses</label>
+                        <label><input type="radio" name="q7" value="b"> 6 meses</label>
+                        <label><input type="radio" name="q7" value="c"> 8 meses</label>
+                        <label><input type="radio" name="q7" value="d"> 12 meses</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h4>2. La causal jubilatoria común para hombres es:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="a"> 55 años y 30 de servicio</label>
+                        <label><input type="radio" name="q8" value="b"> 60 años y 25 de servicio</label>
+                        <label><input type="radio" name="q8" value="c"> 60 años y 30 de servicio</label>
+                        <label><input type="radio" name="q8" value="d"> 65 años y 25 de servicio</label>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkQuiz('module4', ['b', 'c'])">Verificar Respuestas</button>
+                <div id="result-module4" class="result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <!-- Módulo 5: Remuneraciones -->
+        <div id="module5" class="module">
+            <h2>Módulo 5: Remuneraciones y Recibo de Sueldo</h2>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>💵 El Salario - Concepto</h3>
+                <div class="flashcard-content">
+                    <p>Remuneración o ganancia fijada por acuerdo o legislación, debida por un empleador a un trabajador en virtud de un contrato de trabajo.</p>
+                    <p><strong>Clases:</strong></p>
+                    <ul>
+                        <li><strong>Nominal:</strong> Cifra sin descuentos</li>
+                        <li><strong>Real o Líquido:</strong> Efectuados los descuentos</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📅 Oportunidad de Pago</h3>
+                <div class="flashcard-content">
+                    <ul>
+                        <li><strong>Mensual:</strong> Dentro de los 5 primeros días hábiles, nunca después del día 10</li>
+                        <li><strong>Quincenal:</strong> Dentro de los 5 días hábiles al vencimiento</li>
+                        <li><strong>Semanal:</strong> Al finalizar la semana</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📊 Aportes al Sistema</h3>
+                <div class="flashcard-content">
+                    <p><strong>Aportes Obreros:</strong></p>
+                    <ul>
+                        <li>BPS (Jubilatorio): 15%</li>
+                        <li>FONASA: Variable según situación familiar (3% a 8%)</li>
+                        <li>FRL: 0.1%</li>
+                        <li>IRPF: Según escala</li>
+                    </ul>
+                    <p><strong>Aportes Patronales:</strong></p>
+                    <ul>
+                        <li>BPS: 7.5%</li>
+                        <li>FONASA: 5%</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flashcard" onclick="toggleCard(this)">
+                <h3>📋 Elementos del Recibo</h3>
+                <div class="flashcard-content">
+                    <p>Según decreto 337/92, debe contener:</p>
+                    <ul>
+                        <li>Datos completos del trabajador y empresa</li>
+                        <li>Detalle de rubros que componen el salario</li>
+                        <li>Detalle de descuentos efectuados</li>
+                        <li>Fecha de pago</li>
+                        <li>Declaración sobre aportes de seguridad social</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quiz">
+                <h3>Quiz - Módulo 5</h3>
+                <div class="question">
+                    <h4>1. El plazo para pagar salarios mensuales es:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="a"> 3 días hábiles</label>
+                        <label><input type="radio" name="q9" value="b"> 5 días hábiles y nunca después del día 10</label>
+                        <label><input type="radio" name="q9" value="c"> 10 días corridos</label>
+                        <label><input type="radio" name="q9" value="d"> 15 días corridos</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h4>2. El aporte jubilatorio obrero (BPS) es del:</h4>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="a"> 10%</label>
+                        <label><input type="radio" name="q10" value="b"> 12%</label>
+                        <label><input type="radio" name="q10" value="c"> 15%</label>
+                        <label><input type="radio" name="q10" value="d"> 20%</label>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkQuiz('module5', ['b', 'c'])">Verificar Respuestas</button>
+                <div id="result-module5" class="result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <div class="progress" id="progress">
+            <p>Progreso: <span id="completed">0</span> de 5 módulos completados</p>
+        </div>
+    </div>
+    
+    <script>
+        // Variables globales
+        let completedModules = new Set();
+        
+        // Función para mostrar módulo
+        function showModule(moduleId) {
+            // Ocultar todos los módulos
+            const modules = document.querySelectorAll('.module');
+            modules.forEach(module => module.classList.remove('active'));
+            
+            // Mostrar módulo seleccionado
+            document.getElementById(moduleId).classList.add('active');
+            
+            // Actualizar botones
+            const buttons = document.querySelectorAll('.module-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // Función para expandir/contraer tarjetas
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+        
+        // Función para verificar quiz
+        function checkQuiz(moduleId, correctAnswers) {
+            const module = document.getElementById(moduleId);
+            const questions = module.querySelectorAll('.question');
+            let score = 0;
+            let total = correctAnswers.length;
+            
+            questions.forEach((question, index) => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === correctAnswers[index]) {
+                    score++;
+                }
+            });
+            
+            const resultDiv = document.getElementById(`result-${moduleId}`);
+            const percentage = (score / total) * 100;
+            
+            if (percentage >= 60) {
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = `¡Excelente! Obtuviste ${score} de ${total} respuestas correctas (${percentage}%)`;
+                
+                // Marcar módulo como completado
+                completedModules.add(moduleId);
+                updateProgress();
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.textContent = `Necesitas mejorar. Obtuviste ${score} de ${total} respuestas correctas (${percentage}%). Intenta nuevamente.`;
+            }
+            
+            resultDiv.style.display = 'block';
+            
+            // Scroll suave hacia el resultado
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Función para actualizar progreso
+        function updateProgress() {
+            const completedSpan = document.getElementById('completed');
+            completedSpan.textContent = completedModules.size;
+            
+            if (completedModules.size === 5) {
+                const progressDiv = document.getElementById('progress');
+                progressDiv.innerHTML = '<p style="color: #27ae60; font-size: 18px;">¡Felicitaciones! Has completado todos los módulos del curso.</p>';
+            }
+        }
+        
+        // Inicializar tooltips para mejor UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Agregar indicador visual a las tarjetas
+            const flashcards = document.querySelectorAll('.flashcard');
+            flashcards.forEach(card => {
+                const title = card.querySelector('h3');
+                title.innerHTML += ' <span style="float: right; font-size: 14px; color: #7f8c8d;">Click para expandir</span>';
+            });
+        });
+        
+        // Función para reiniciar quiz
+        function resetQuiz(moduleId) {
+            const module = document.getElementById(moduleId);
+            const radios = module.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => radio.checked = false);
+            
+            const resultDiv = document.getElementById(`result-${moduleId}`);
+            resultDiv.style.display = 'none';
+        }
+        
+        // Event listener para cambios en radio buttons
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'radio') {
+                // Encontrar el módulo padre
+                const module = e.target.closest('.module');
+                if (module) {
+                    const resultDiv = module.querySelector('.result');
+                    if (resultDiv && resultDiv.style.display === 'block') {
+                        resultDiv.style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
